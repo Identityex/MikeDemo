@@ -1,10 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -28,6 +23,9 @@ namespace MikeDemoProject
             services.AddControllersWithViews();
             services.AddAntiforgery();
 
+            /*Would normally use add DbContext with the connection string in the config file
+               but for the sake of this project doint it this way
+             */
             services.AddTransient<MikeDBContext>();
             services.AddScoped<AutomobileRepoModel>();
         }

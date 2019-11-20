@@ -10,13 +10,17 @@ namespace MikeDemoProject.Models
 {
     public class AutomobileRepoModel : IAutomobileRepository<Automobiles>
     {
-
+        //DI for database
         private static MikeDBContext _mikeDBContext;
         public AutomobileRepoModel(MikeDBContext mikeDBContext)
         {
             _mikeDBContext = mikeDBContext;
         }
 
+        /// <summary>
+        /// Add Automobile to database when not using the Vehicle objects
+        /// </summary>
+        /// <param name="automobile">Automobile Entity object</param>
         public void AddAutomobile(Automobiles automobile)
         {
             if (automobile != null)
@@ -26,12 +30,21 @@ namespace MikeDemoProject.Models
             }
         }
 
+        /// <summary>
+        /// Find Automobile base on id
+        /// </summary>
+        /// <param name="id">Automobile id</param>
+        /// <returns>Autmobile</returns>
         public Automobiles FindById(int id)
         {
             return _mikeDBContext.Automobiles
                 .FirstOrDefault(c => c.AutomobileId == id);
         }
 
+        /// <summary>
+        /// Returns a listing of Autmobiles in database
+        /// </summary>
+        /// <returns>Listing of Automobiles</returns>
         public IEnumerable<Automobiles> GetAutomobiles()
         {
             return _mikeDBContext.Automobiles
@@ -62,10 +75,11 @@ namespace MikeDemoProject.Models
         /// <param name="vehicle">The input vehicle</param>
         public void AddVehicle<T>(T vehicle) where T : Vehicle
         {
+            Automobiles automobile = null;
             if (typeof(T) == typeof(Truck))
             {
                 Truck truck = (Truck)(object)vehicle;
-                Automobiles automobile = new Automobiles
+                automobile = new Automobiles
                 {
                     Colour = vehicle.colour,
                     DateAdded = DateTime.Now,
@@ -75,13 +89,11 @@ namespace MikeDemoProject.Models
                     Name = vehicle.name,
                     JsonDetails = JsonConvert.SerializeObject(new { truck.boxSize, truck.fourByFour })
                 };
-
-                AddAutomobile(automobile);
             }
             else if (typeof(T) == typeof(Car))
             {
                 Car car = (Car)(object)vehicle;
-                Automobiles automobile = new Automobiles
+                automobile = new Automobiles
                 {
                     Colour = vehicle.colour,
                     DateAdded = DateTime.Now,
@@ -91,13 +103,11 @@ namespace MikeDemoProject.Models
                     Name = vehicle.name,
                     JsonDetails = JsonConvert.SerializeObject(new { car.doors })
                 };
-
-                AddAutomobile(automobile);
             }
             else if (typeof(T) == typeof(Motorbike))
             {
                 Motorbike motorbike = (Motorbike)(object)vehicle;
-                Automobiles automobile = new Automobiles
+                automobile = new Automobiles
                 {
                     Colour = vehicle.colour,
                     DateAdded = DateTime.Now,
@@ -107,13 +117,13 @@ namespace MikeDemoProject.Models
                     Name = vehicle.name,
                     JsonDetails = JsonConvert.SerializeObject(new { motorbike.passengerSeat })
                 };
-
-                AddAutomobile(automobile);
             }
             else
             {
                 throw new Exception("Model not yet implemented");
             }
+
+            AddAutomobile(automobile);
         }
     }
 }

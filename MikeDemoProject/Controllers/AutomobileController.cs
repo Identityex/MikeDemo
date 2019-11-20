@@ -18,11 +18,11 @@ namespace MikeDemoProject.Controllers
 
         public IActionResult Index()
         {
+            //Like doing it this way makes pages more managable when coding
             return View("Automobile");
         }
 
 
-        //Deserialize object myself since it can be multiple cases
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult AddVehicle(string vehicle, string type)
@@ -31,6 +31,7 @@ namespace MikeDemoProject.Controllers
             {
                 switch (type)
                 {
+                    //Deserialize object myself since it can be multiple cases
                     case "Truck":
                         Truck truck = JsonConvert.DeserializeObject<Truck>(vehicle);
                         _automobileRepoModel.AddVehicle(truck);

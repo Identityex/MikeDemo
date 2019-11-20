@@ -17,9 +17,8 @@ namespace MikeDemoTests
         private Mock<DbSet<Automobiles>> _mockAutmobile;
         private Mock<DbSet<AutomobileTypes>> _mockTypes;
         private IAutomobileRepository<Automobiles> _automobileRepo;
-
-        IQueryable<AutomobileTypes> _automobileTypes;
-        IQueryable<Automobiles> _automobiles;
+        private IQueryable<AutomobileTypes> _automobileTypes;
+        private IQueryable<Automobiles> _automobiles;
 
         [SetUp]
         public void Setup()
@@ -31,8 +30,8 @@ namespace MikeDemoTests
                 new AutomobileTypes { type = "Motorbike", wheels = 2 }
             }.AsQueryable();
 
-            _automobiles = new List<Automobiles> 
-            { 
+            _automobiles = new List<Automobiles>
+            {
                 new Automobiles { AutomobileId = 1 }
             }.AsQueryable();
 
