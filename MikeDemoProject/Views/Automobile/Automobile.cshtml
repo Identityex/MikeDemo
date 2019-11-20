@@ -1,0 +1,76 @@
+﻿
+@{
+    ViewData["Title"] = "Automobile";
+}
+
+<h1>Automobile</h1>
+
+@Html.AntiForgeryToken()
+
+<style>
+    .border-container{
+        border: 1px solid black;
+    }
+    .input-group{
+        justify-content: space-evenly;
+    }
+</style>
+<script src="~/js/Automobile.js" asp-append-version="true"></script>
+
+<div class="container-fluid">
+    <div class="row p-1 border-container flex-column mb-2">
+        <select id="typeSel">
+            <option>Truck</option>
+            <option>Car</option>
+            <option>Motorbike</option>
+        </select>
+
+        <div class="input-group p-2 mb-2 eve" id="vehicleArea">
+            <div class="">
+                <label>Name :</label><input id="nameInput" type="text" />
+            </div>
+            <div class="">
+                <label>Colour :</label><input id="colourInput" type="text" />
+            </div>
+
+            <div class="">
+                <label>Price :</label><input id="priceInput" type="text" />
+            </div>
+        </div>
+        <div id="truckArea" class="input-group p-1">
+            <div class="">
+                <label>boxSize :</label><input id="boxSizeInput" type="text" />
+            </div>
+            <div class="">
+                <label>4X4 : </label><input id="4X4Input" type="checkbox" checked />
+            </div>
+        </div>
+        <div id="carArea" class="input-group p-1">
+            <div class="">
+                <label>Doors : </label><input id="doorsInput" type="text" />
+            </div>
+        </div>
+        <div id="motorbikeArea" class="input-group p-1">
+            <div class="">
+                <label>Passenger Seat :</label><input id="passSeatInput" type="text" />
+            </div>
+        </div>
+
+        <button id="addBtn" class="btn btn-primary">Add Vehicle</button>
+    </div>
+
+    <div class="table-container">
+        <table id="AutomobileTable" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <td>Name</td>
+                    <td>Colour</td>
+                    <td>Price</td>
+                    <td>Action</td>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div>
