@@ -5,6 +5,8 @@ using MikeDemoDBEntities.Models;
 using MikeDemoProject.Models;
 using Moq;
 using NUnit.Framework;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +21,8 @@ namespace MikeDemoTests
         private IAutomobileRepository<Automobiles> _automobileRepo;
         private IQueryable<AutomobileTypes> _automobileTypes;
         private IQueryable<Automobiles> _automobiles;
+        private IWebDriver _webDriver;
+
 
         [SetUp]
         public void Setup()
@@ -57,6 +61,8 @@ namespace MikeDemoTests
                 .Returns(_mockAutmobile.Object);
 
             _automobileRepo = new AutomobileRepoModel(_mikeDBContext.Object);
+
+            _webDriver = new ChromeDriver("D:\\ChromeDriver2\\");
         }
 
 
@@ -80,6 +86,20 @@ namespace MikeDemoTests
             _automobileRepo.RemoveAutmobile(1);
             _mikeDBContext.Verify();
 
+        }
+
+        //Verify Automobile page works
+        [Test]
+        [Category("Web Test")]
+        public void CanHitAutomobilePage()
+        {
+            _webDriver.Url = "https://localhost:44333/Automobile";
+        }
+
+        [TearDown]
+        public void CloseBrowser()
+        {
+            _webDriver.Close();
         }
     }
 }
