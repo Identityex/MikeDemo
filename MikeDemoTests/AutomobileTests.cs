@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using MikeDemoDBEntities.Interfaces;
 using MikeDemoDBEntities.Models;
+using MikeDemoProject.DAL;
 using MikeDemoProject.Models;
 using Moq;
 using NUnit.Framework;
@@ -60,7 +61,7 @@ namespace MikeDemoTests
             _mikeDBContext.Setup(c => c.Automobiles)
                 .Returns(_mockAutmobile.Object);
 
-            _automobileRepo = new AutomobileRepoModel(_mikeDBContext.Object);
+            _automobileRepo = new AutomobileRepository(_mikeDBContext.Object);
 
             _webDriver = new ChromeDriver("D:\\ChromeDriver2\\");
         }
@@ -71,7 +72,7 @@ namespace MikeDemoTests
         /// </summary>
         [Test]
         [Category("Database Test")]
-        public void CanAddRemoveAutombile()
+        public void CanAddRemoveAutomobile()
         {
             _mikeDBContext.Setup(c => c.SaveChanges()).Verifiable();
             _automobileRepo.AddAutomobile(new Automobiles
@@ -79,7 +80,7 @@ namespace MikeDemoTests
                 Colour = "Red",
                 DateAdded = DateTime.Now,
                 Price = 2.00
-            });
+            }, "Car");
             _mikeDBContext.Verify();
 
             _mikeDBContext.Setup(c => c.SaveChanges()).Verifiable();

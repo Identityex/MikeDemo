@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MikeDemoProject.Models;
+using MikeDemoProject.Services;
 using Newtonsoft.Json;
 using System;
 using System.Linq;
@@ -8,12 +9,12 @@ namespace MikeDemoProject.Controllers
 {
     public class AutomobileController : Controller
     {
-        private readonly AutomobileRepoModel _automobileRepoModel;
+        private readonly VehicleService _vehicleService;
 
         //Setup class constructor for dependency injection
-        public AutomobileController(AutomobileRepoModel automobileRepoModel)
+        public AutomobileController(VehicleService vehicleService)
         {
-            _automobileRepoModel = automobileRepoModel;
+            _vehicleService = vehicleService;
         }
 
         public IActionResult Index()
@@ -34,15 +35,15 @@ namespace MikeDemoProject.Controllers
                     //Deserialize object myself since it can be multiple cases
                     case "Truck":
                         Truck truck = JsonConvert.DeserializeObject<Truck>(vehicle);
-                        _automobileRepoModel.AddVehicle(truck);
+                        _vehicleService.AddVehicle(truck);
                         break;
                     case "Car":
                         Car car = JsonConvert.DeserializeObject<Car>(vehicle);
-                        _automobileRepoModel.AddVehicle(car);
+                        _vehicleService.AddVehicle(car);
                         break;
                     case "Motorbike":
                         Motorbike motorbike = JsonConvert.DeserializeObject<Motorbike>(vehicle);
-                        _automobileRepoModel.AddVehicle(motorbike);
+                        _vehicleService.AddVehicle(motorbike);
                         break;
                     default:
                         return BadRequest("Not Accepted Type");
@@ -60,15 +61,15 @@ namespace MikeDemoProject.Controllers
         [ValidateAntiForgeryToken]
         public void DeleteVehicle(int id)
         {
-            _automobileRepoModel.RemoveAutmobile(id);
+            _vehicleService.RemoveVehicleById(id);
         }
 
         [HttpGet]
         [ValidateAntiForgeryToken]
         public JsonResult GetVehicles()
         {
-            var returnList = _automobileRepoModel.GetAutomobiles()
-                .Select(c => new { c.AutomobileId, c.Colour, c.Price, c.Name });
+            var returnList = _vehicleService.GetAllVehicles()
+                .Select(c => new { c.vehicleId, c.colour, c.price, c.name });
             return Json(returnList);
         }
     }

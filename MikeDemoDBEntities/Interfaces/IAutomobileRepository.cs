@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 namespace MikeDemoDBEntities.Interfaces
 {
-    public interface IAutomobileRepository<T> where T : IAutomobileEntity
+    public interface IAutomobileRepository<T> where T : AutomobileEntity
     {
-        void AddAutomobile(T automobile);
+        void AddAutomobile(T automobile, string type);
         void RemoveAutmobile(int id);
-        IEnumerable<Automobiles> GetAutomobiles();
+        IEnumerable<T> GetAutomobiles();
         Automobiles FindById(int id);
     }
 }

@@ -133,7 +133,7 @@
                                 <td>${item.name}</td>
                                 <td>${item.colour}</td>
                                 <td>${item.price}</td>
-                                <td><button class='delete-btn' value='${item.automobileId}'>Delete</button></td>
+                                <td><button class='delete-btn' value='${item.vehicleId}'>Delete</button></td>
                             </tr>`;
 
                         $('#AutomobileTable').find('tbody').append(newRow);

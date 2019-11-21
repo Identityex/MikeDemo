@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace MikeDemoProject.Models
+﻿namespace MikeDemoProject.Models
 {
     public class Motorbike : Vehicle
     {

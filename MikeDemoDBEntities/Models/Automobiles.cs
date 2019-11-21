@@ -6,7 +6,7 @@ using System.Text;
 
 namespace MikeDemoDBEntities.Models
 {
-    public class Automobiles : IAutomobileEntity
+    public class Automobiles : AutomobileEntity
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

@@ -4,7 +4,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MikeDemoDBEntities.Models;
-using MikeDemoProject.Models;
+using MikeDemoProject.DAL;
+using MikeDemoProject.Services;
 
 namespace MikeDemoProject
 {
@@ -27,7 +28,8 @@ namespace MikeDemoProject
                but for the sake of this project doint it this way
              */
             services.AddTransient<MikeDBContext>();
-            services.AddScoped<AutomobileRepoModel>();
+            services.AddTransient<VehicleService>();
+            services.AddScoped<AutomobileRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

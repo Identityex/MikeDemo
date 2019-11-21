@@ -5,6 +5,6 @@ using System.Text;
 namespace MikeDemoDBEntities
 {
     //For sake of Repository pattern
-    public class IAutomobileEntity
+    public class AutomobileEntity
     {}
 }
